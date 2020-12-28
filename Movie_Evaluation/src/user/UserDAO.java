@@ -13,7 +13,7 @@ public class UserDAO {
 
 	public UserDAO() {
 		try {
-			String url = "jdbc:mysql://localhost:3306/JSP_BBS";
+			String url = "jdbc:mysql://localhost:3306/Evaluation";
 			String ID = "root";
 			String Password = "mysql";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -23,7 +23,7 @@ public class UserDAO {
 		}
 	}
 
-	public int login(String userID, String userPassword) {
+	public int login (String userID, String userPassword) {
 		String sql = "select userPassword from user where userID = ?";
 		try {
 			pst = cn.prepareStatement(sql);
@@ -43,7 +43,7 @@ public class UserDAO {
 		return -2;
 	}
 	
-	public int create(UserVO user) {
+	public int create (UserVO user) {
 		String sql = "insert into user values(?, ?, ?, ?)";
 		try {
 			pst = cn.prepareStatement(sql);

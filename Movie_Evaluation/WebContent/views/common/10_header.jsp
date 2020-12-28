@@ -15,6 +15,12 @@
   <title>Movie Evaluation</title>
 </head>
 <body>
+<%
+	String userID = null;
+	if (session.getAttribute("userID") != null) {
+		userID = (String) session.getAttribute("userID");
+	}
+%>
 	<nav class="navbar navbar-expand-lg navbar-light fixed-top"
 		id="mainNav">
 		<div class="container">
@@ -34,6 +40,9 @@
 						<a class="nav-link" href="review.jsp">Review</a></li>
 				</ul>
 			</div>
+			<%
+				if (userID == null) {
+			%>
     		<div class="collapse navbar-collapse" id="navbarResponsive">
         		<ul class="navbar-nav ml-auto">
            		 	<li class="nav-item">
@@ -44,6 +53,19 @@
             			<i class="fa fa-user"></i> Create</a></li>
         		</ul>
     		</div>
+    		<%
+				} else {
+			%>
+    		<div class="collapse navbar-collapse" id="navbarResponsive">
+        		<ul class="navbar-nav ml-auto">
+           		 	<li class="nav-item">
+						<a class="nav-link" href="views/user/logoutAction.jsp">
+						<i class="fa fa-user"></i> Logout</a></li>
+        		</ul>
+    		</div>
+    		<%
+				}
+			%>
 		</div>
 	</nav>
 	<!-- The Login Modal -->
