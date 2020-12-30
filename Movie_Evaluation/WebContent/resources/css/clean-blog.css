@@ -5,14 +5,14 @@
  */
 
 body {
-  font-size: 20px;
+  font-size: 16px;
   color: #212529;
   font-family: 'Lora', 'Times New Roman', serif;
 }
 
 p {
-  line-height: 1.5;
-  margin: 30px 0;
+  line-height: 1.0;
+  margin: 10px 0;
 }
 
 p a {
@@ -386,10 +386,10 @@ footer .copyright {
 .btn {
   font-size: 14px;
   font-weight: 800;
-  padding: 15px 25px;
+  padding: 6px 12px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  border-radius: 0;
+  border-radius: 4px;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
