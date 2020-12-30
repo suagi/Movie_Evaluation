@@ -1,9 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="views/common/10_header.jsp"></jsp:include>
+<%@ page import="java.io.PrintWriter"%>
+<%@ page import="content.MovieDAO"%>
+<%@ page import="content.MovieVO"%>
+<%@ page import="java.util.ArrayList"%>
 <%
 	String userID = null;
 	if (session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
+	}
+	int pageNumber = 1;
+	if (request.getParameter("pageNumber") != null) {
+		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
 %>
 <header class="masthead" style="background-image: url('img/home-bg.jpg')">
@@ -22,6 +30,7 @@
   <section class="featured spad">
         <div class="container">
 <form method="get" action="./index.jsp" class="form-inline mt-3">
+
 			<select name="lectureDivide" class="form-control mx-1 mt-2">
 				<option value="All">All</option>
 				<option value="Title">Title</option>
@@ -32,7 +41,7 @@
 			<%
 				if (userID != null && userID.equals("KING")) {
 			%>
-			<a class="btn btn-secondary ml-auto" href="moviePosting.jsp">Posting</a>
+			<a class="btn btn-secondary ml-auto mx-1 mt-2" href="moviePosting.jsp">Posting</a>
 			<%
 				}
 			%>
@@ -46,21 +55,13 @@
                 </div>
             </div>
 		<div class="row featured__filter">
-			<div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-				<div class="featured__item">
-					<div class="featured__item__pic set-bg"
-						data-setbg="img/featured/feature-1.jpg">
-						<ul class="featured__item__pic__hover">
-
-						</ul>
-					</div>
-					<div class="featured__item__text">
-						<h5>
-							<a href="movieDetail.jsp">기생충</a>
-						</h5>
-					</div>
-				</div>
-			</div>
+			<%
+				/* CommentDAO commentDAO = new CommentDAO();
+				int commentCnt = 0; */
+				MovieDAO movieDAO = new MovieDAO();
+				ArrayList<MovieVO> list = movieDAO.getList(pageNumber);
+				for (int i = 0; i < list.size(); i++) {
+			%>
 			<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
 				<div class="featured__item">
 					<div class="featured__item__pic set-bg"
@@ -70,43 +71,28 @@
 						</ul>
 					</div>
 					<div class="featured__item__text">
-						<h5>
-							<a href="#">Crab Pool Security</a>
-						</h5>
+						<h6>
+							<a href="movieDetail.jsp?movieID=<%= list.get(i).getMovieID() %>"><%= list.get(i).getMovieTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("/n", "<br>") %></a>
+						</h6>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-				<div class="featured__item">
-					<div class="featured__item__pic set-bg"
-						data-setbg="img/featured/feature-3.jpg">
-						<ul class="featured__item__pic__hover">
-
-						</ul>
-					</div>
-					<div class="featured__item__text">
-						<h5>
-							<a href="#">Crab Pool Security</a>
-						</h5>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-				<div class="featured__item">
-					<div class="featured__item__pic set-bg"
-						data-setbg="img/featured/feature-4.jpg">
-						<ul class="featured__item__pic__hover">
-
-						</ul>
-					</div>
-					<div class="featured__item__text">
-						<h5>
-							<a href="#">Crab Pool Security</a>
-						</h5>
-					</div>
-				</div>
-			</div>
+			<%
+				}
+			%>
 		</div>
+		<hr>
+    		<%
+				if (pageNumber != 1) {
+			%>
+				<a href = "movie.jsp?pageNumber=<%=pageNumber - 1 %>" class="btn btn-secondary btn-arrow-left">next</a>
+			<% 
+				} if (movieDAO.nextPage(pageNumber + 1)) {
+			%>
+				<a href = "movie.jsp?pageNumber=<%=pageNumber + 1 %>" class="btn btn-secondary btn-arrow-left">prev</a>
+			<%
+				}
+			%>
 	</div>
     </section>
 <jsp:include page="views/common/90_footer.jsp"></jsp:include>

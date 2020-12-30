@@ -1,6 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter"%>
+<%@ page import="content.MovieVO"%>
+<%@ page import="content.MovieDAO"%>
 <jsp:include page="views/common/10_header.jsp"></jsp:include>
+<%
+		String userID = null;
+		if (session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
+		int movieID = 0;
+		if (request.getParameter("movieID") != null) {
+			movieID = Integer.parseInt(request.getParameter("movieID"));
+		}
+		if (movieID == 0) {
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('유효하지 않은 글입니다.')");
+			script.println("location.href = 'bbs.jsp'");
+			script.println("</script>");
+		}
+		MovieVO movieVO = new MovieDAO().getMovieVO(movieID);	
+		
+	%>
 <header class="masthead"
 	style="background-image: url('img/home-bg.jpg')">
 	<div class="overlay"></div>
@@ -8,7 +29,7 @@
 		<div class="row">
 			<div class="col-lg-8 col-md-10 mx-auto">
 				<div class="site-heading">
-					<h1>Title</h1>
+					<h1><%= movieVO.getMovieTitle() %></h1>
 				</div>
 			</div>
 		</div>
@@ -26,21 +47,17 @@
 					</div>
 					<div class="col-md-6">
 						<ul class="movie-meta">
-							<li><strong>Rating:</strong> 4.00 out of 5</li>
-							<li><strong>Length:</strong> 98 min</li>
-							<li><strong>Premiere:</strong> 22 March 2013 (USA)</li>
+							<li><strong>Rating:</strong> <%= movieVO.getMovieRating() %></li>
+							<li><strong>Length:</strong> <%= movieVO.getMovieLength() %></li>
+							<li><strong>Premiere:</strong> <%= movieVO.getMoviePremiere() %></li>
 						</ul>
 						<ul class="starring">
-							<li><strong>Directors:</strong> Kirk de Mico (as Kirk
-								DeMico). Chris Sanders</li>
-							<li><strong>Actors:</strong> Chris Sanders (screenplay),
-								Kirk De Micco (screenplay)</li>
+							<li><strong>Directors:</strong> <%= movieVO.getMovieDirector() %></li>
+							<li><strong>Actors:</strong> <%= movieVO.getMovieActor() %></li>
 						</ul>
 						<div class="movie-summary">
-							<p>Sed ut perspiciatis unde omnis iste natus error sit
-								voluptatem accusantium doloremque laudantium, totam rem aperiam,
-								eaque ipsa quae ab illo inventore veritatis et quasi architecto
-								beatae vitae dicta sunt explicabo.</p>
+							<p><%= movieVO.getMovieContent().replaceAll(" ", "&nbsp;")
+							.replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("/n", "<br>") %></p>
 						</div>
 					</div>
 				</div>

@@ -105,4 +105,47 @@ public class MovieDAO {
 		}
 		return list;
 	}
+	
+	public boolean nextPage(int pageNumber) { // 10개씩 끊기 위함
+		String sql = "select * from movie where movieID < ? and MovieAvailable = 1";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, getNext() - (pageNumber - 1) * 12);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public MovieVO getMovieVO(int movieID) {
+		String sql = "select * from movie where movieID =?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, movieID);
+			rs = pst.executeQuery();
+			if (rs.next()) {
+				MovieVO movieVO = new MovieVO();
+				movieVO.setMovieID(rs.getInt(1));
+				movieVO.setMovieThumbnail(rs.getString(2));
+				movieVO.setMovieTitle(rs.getString(3));
+				movieVO.setMovieLength(rs.getString(4));
+				movieVO.setMoviePremiere(rs.getString(5));
+				movieVO.setMovieDirector(rs.getString(6));
+				movieVO.setMovieActor(rs.getString(7));
+				movieVO.setMovieContent(rs.getString(8));
+				movieVO.setMovieAvailable(rs.getInt(9));
+				movieVO.setUserID(rs.getString(10));
+				movieVO.setUploadDate(rs.getString(11));
+				movieVO.setMovieRating(rs.getInt(12));
+				return movieVO;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
