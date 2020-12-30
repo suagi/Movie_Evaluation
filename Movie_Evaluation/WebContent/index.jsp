@@ -1,15 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <jsp:include page="views/common/10_header.jsp"></jsp:include>
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+<div class="overlay"></div>
+    <div class="container">
+   		<div class="row">
+    		<div class="col-lg-8 col-md-10 mx-auto">
+    		<div class="site-heading">
+    			<h1>JSP Portfolio</h1>
+    			<span class="subheading">Movie Evaluation</span>
+    		</div>
+    		</div>
+    	</div>
+	</div>
+</header>
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <div class="post-preview">
           <a href="post.html">
             <h2 class="post-title">
-              Man must explore, and this is exploration at its greatest
+              New Movie 5.
             </h2>
             <h3 class="post-subtitle">
-              Problems look mighty small from 150 miles up
+              디바이드 다섯개 - 썸네일 노출 후 하단에 작게 제목, 신작순
             </h3>
           </a>
           <p class="post-meta">Posted by
@@ -20,8 +33,11 @@
         <div class="post-preview">
           <a href="post.html">
             <h2 class="post-title">
-              I believe every human has a finite number of heartbeats. I don't intend to waste any of mine.
+              New Drama 5.
             </h2>
+            <h3 class="post-subtitle">
+              디바이드 다섯개 - 썸네일 노출 후 하단에 작게 제목, 신작순
+            </h3>
           </a>
           <p class="post-meta">Posted by
             <a href="#">Start Bootstrap</a>
@@ -58,10 +74,9 @@
         <hr>
         <!-- Pager -->
         <div class="clearfix">
-          <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          <a class="btn btn-primary float-right" href="#">Update &rarr;</a>
         </div>
       </div>
     </div>
   </div>
-  <hr>
 <jsp:include page="views/common/90_footer.jsp"></jsp:include>
