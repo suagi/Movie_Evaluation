@@ -54,8 +54,8 @@ public class MovieDAO {
 	}
 	
 	public int posting(String movieThumbnail, String movieTitle, String movieLength, String moviePremiere, 
-			String movieDirector, String movieActor, String movieContent, String userID) {
-		String sql = "insert into movie values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String movieDirector, String movieActor, String movieContent, String userID, String movieShow) {
+		String sql = "insert into movie values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setInt(1, getNext());
@@ -70,6 +70,7 @@ public class MovieDAO {
 			pst.setString(10, userID);
 			pst.setString(11, getDate());
 			pst.setFloat(12, 0);
+			pst.setString(13, movieShow);
 			return pst.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,6 +99,7 @@ public class MovieDAO {
 				movieVO.setUserID(rs.getString(10));
 				movieVO.setUploadDate(rs.getString(11));
 				movieVO.setMovieRating(rs.getInt(12));
+				movieVO.setMovieShow(rs.getString(13));
 				list.add(movieVO);
 			}
 		} catch (Exception e) {
@@ -141,6 +143,7 @@ public class MovieDAO {
 				movieVO.setUserID(rs.getString(10));
 				movieVO.setUploadDate(rs.getString(11));
 				movieVO.setMovieRating(rs.getInt(12));
+				movieVO.setMovieShow(rs.getString(13));
 				return movieVO;
 			}
 		} catch (Exception e) {

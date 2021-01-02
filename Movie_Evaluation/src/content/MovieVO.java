@@ -14,7 +14,14 @@ public class MovieVO {
 	private String userID;
 	private String uploadDate;
 	private int movieRating;
+	private String movieShow;
 
+	public String getMovieShow() {
+		return movieShow;
+	}
+	public void setMovieShow(String movieShow) {
+		this.movieShow = movieShow;
+	}
 	public int getMovieID() {
 		return movieID;
 	}

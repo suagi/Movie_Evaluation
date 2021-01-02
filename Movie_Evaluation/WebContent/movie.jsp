@@ -13,6 +13,13 @@
 	if (request.getParameter("pageNumber") != null) {
 		pageNumber = Integer.parseInt(request.getParameter("pageNumber"));
 	}
+	if (userID == null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인을 해주세요.')");
+		script.println("location.href = 'index.jsp'");
+		script.println("</script>");
+	}
 %>
 <header class="masthead" style="background-image: url('img/home-bg.jpg')">
 <div class="overlay"></div>
@@ -39,7 +46,7 @@
 			<input type="text" name="search" class="form-control mx-1 mt-2">
 			<button type="submit" class="btn btn-secondary mx-1 mt-2">Search</button>
 			<%
-				if (userID != null && userID.equals("KING")) {
+				if (userID.equals("KING")) {
 			%>
 			<a class="btn btn-secondary ml-auto mx-1 mt-2" href="moviePosting.jsp">Posting</a>
 			<%
@@ -67,7 +74,6 @@
 					<div class="featured__item__pic set-bg"
 						data-setbg="img/featured/feature-2.jpg">
 						<ul class="featured__item__pic__hover">
-
 						</ul>
 					</div>
 					<div class="featured__item__text">

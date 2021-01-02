@@ -6,7 +6,7 @@
 		<tbody>
 			<tr>
 				<td>Thumbnail</td>
-				<td><input type="text" name="movieThumbnail" style="width: 500px;"></td>
+				<td><input type="file" name="movieThumbnail" style="width: 500px;"></td>
 			</tr>
 			<tr>
 				<td>Title</td>
@@ -31,6 +31,10 @@
 			<tr>
 				<td>Content</td>
 				<td><textarea name="movieContent" placeholder="" style="width: 100%; height: 200px;"></textarea></td>
+			</tr>
+			<tr>
+				<td>Show</td>
+				<td><input type="text" name="movieShow" style="width: 100%;" placeholder="https://www.youtube.com/-----/------"></td>
 			</tr>
 		</tbody>
 	</table>

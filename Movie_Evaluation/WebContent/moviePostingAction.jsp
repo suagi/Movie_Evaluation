@@ -10,6 +10,7 @@
 <jsp:setProperty name="movie" property="movieDirector" />
 <jsp:setProperty name="movie" property="movieActor" />
 <jsp:setProperty name="movie" property="movieContent" />
+<jsp:setProperty name="movie" property="movieShow" />
 <%
 	String userID = null;
 	if (session.getAttribute("userID") != null) {
@@ -18,13 +19,13 @@
 	if (userID == null) {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인을 하시오.')");
+		script.println("alert('로그인을 해주세요.')");
 		script.println("location.href = 'index.jsp'");
 		script.println("</script>");
 	} else {
-		if (movie.getMovieTitle() == null || movie.getMovieContent() == null || movie.getMovieThumbnail() == null
-			 || movie.getMovieActor() == null || movie.getMovieDirector() == null
-			 || movie.getMovieLength() == null || movie.getMoviePremiere() == null) {
+		if (movie.getMovieTitle() == null || movie.getMovieContent() == null || movie.getMovieThumbnail() == null 
+			|| movie.getMovieActor() == null || movie.getMovieDirector() == null || movie.getMovieLength() == null
+			|| movie.getMoviePremiere() == null || movie.getMovieShow() == null) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('공란이 존재합니다.')");
@@ -33,7 +34,8 @@
 		} else {
 			MovieDAO movieDAO = new MovieDAO();
 			int result = movieDAO.posting(movie.getMovieThumbnail(), movie.getMovieTitle(), movie.getMovieLength(), 
-				movie.getMoviePremiere(), movie.getMovieDirector(), movie.getMovieActor(), movie.getMovieContent(), userID);
+				movie.getMoviePremiere(), movie.getMovieDirector(), movie.getMovieActor(), movie.getMovieContent(),
+				userID, movie.getMovieShow());
 		if (result == -1) {
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
