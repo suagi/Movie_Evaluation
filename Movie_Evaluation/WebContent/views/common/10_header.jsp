@@ -37,6 +37,8 @@
 						<a class="nav-link" href="movie.jsp">Movie</a></li>
 					<li class="nav-item">
 						<a class="nav-link" href="drama.jsp">Drama</a></li>
+					<li class="nav-item">
+						<a class="nav-link" href="Animation.jsp">Animation</a></li>
 				</ul>
 			</div>
 			<%
